@@ -24,8 +24,8 @@ steps:
 
 - script: |
     for f in $(find . -name "*.py" -not -path "./.venv/*" -not -path "./.git/*"); do
-      echo "##[group]$f"
+      echo ""
+      echo "=============== $f ==============="
       cat "$f"
-      echo "##[endgroup]"
     done
   displayName: 'Afficher le code'
