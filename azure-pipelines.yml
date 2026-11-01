@@ -23,11 +23,9 @@ steps:
   displayName: 'Vérifier la syntaxe du code'
 
 - script: |
-    ls -R
-  displayName: 'Afficher les fichiers du projet'
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.SourcesDirectory)'
-    artifact: 'code-source'
-  displayName: 'Publier le code'
+    for f in $(find . -name "*.py" -not -path "./.venv/*" -not -path "./.git/*"); do
+      echo "##[group]$f"
+      cat "$f"
+      echo "##[endgroup]"
+    done
+  displayName: 'Afficher le code'
